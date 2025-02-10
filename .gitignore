@@ -1,0 +1,20 @@
+# Ignore Python cache and logs
+*.log
+*.pyc
+__pycache__/
+
+# Ignore virtual environments
+.env
+.venv
+env/
+venv/
+
+# Ignore database files
+*.sqlite3
+
+# Ignore Django migration files
+**/migrations/
+
+# Ignore system files
+*.DS_Store
+.history
