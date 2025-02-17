@@ -56,10 +56,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'libraryproject.urls'
 
+import os  # ✅ Add this at the top of the file
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, "apps/templates")  # ✅ Define the templates directory
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],  # ✅ Use the template directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'libraryproject.wsgi.application'
 
