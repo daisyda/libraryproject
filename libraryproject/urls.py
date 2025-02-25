@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-import apps.bookmodule.views
+from apps.bookmodule import views
 
 from django.urls import include, path
 
@@ -26,6 +26,9 @@ urlpatterns = [
    # path('index2/<int:val1>/', apps.bookmodule.views.index2),
     path('books/', include("apps.bookmodule.urls")),  
     path('users/', include("apps.usermodule.urls")),  
+    #path('', views.index, name="home"),  # Home Page should load index.ht
+    path('', include('apps.bookmodule.urls')),  # Redirect root URL to books.index
 ]
+
 
 

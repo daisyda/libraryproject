@@ -63,7 +63,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "apps/templates")  # ✅ Define the templa
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],  # ✅ Use the template directory
+        'DIRS': [os.path.join(BASE_DIR, "apps", "templates")],  # ✅ Ensure this points to the correct folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'libraryproject.wsgi.application'
 
@@ -126,6 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "apps", "static")  # ✅ Ensure correct path
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

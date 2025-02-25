@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %} My Website {% endblock title %}</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{% static 'qu-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+    <!-- Include Navigation -->
+    {% include "includes/header.html" %}
+
+    <!-- Page Content -->
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+
+    <!-- Include Footer -->
+    {% include "includes/footer.html" %}
+
+</body>
+</html>
