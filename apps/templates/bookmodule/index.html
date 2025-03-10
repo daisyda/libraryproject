@@ -1,13 +1,44 @@
 {% extends "layouts/base.html" %}
 {% block title %} Home | My Library {% endblock title %}
 
-{% block content %}
-<h1>Welcome to My Library</h1>
-<p>Browse a collection of books and learn more about your favorite topics.</p>
+{% block stylesheets %}
+    <style>
+        /* Internal CSS */
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+        p {
+            color: white;
+            background-color: black;
+            padding: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px;
+        }
+        a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: green;
+        }
+    </style>
+{% endblock stylesheets %}
 
-<!-- Links to Other Pages -->
-<ul>
-    <li><a href="{% url 'books.list_books' %}">View List of Books</a></li>
-    <li><a href="{% url 'books.aboutus' %}">About Us</a></li>
-</ul>
+{% block content %}
+    <h1 style="border-bottom: 3px solid gray;">Welcome to My Library</h1>  <!-- Inline CSS -->
+    
+    <p>Browse a collection of books and learn more about your favorite topics.</p>
+
+    <!-- Links to Other Pages -->
+    <ul>
+        <li><a href="{% url 'books.list_books' %}" style="font-size: 18px;">View List of Books</a></li>  <!-- Inline CSS -->
+        <li><a href="{% url 'books.aboutus' %}">About Us</a></li>
+    </ul>
 {% endblock content %}

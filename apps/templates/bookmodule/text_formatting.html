@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Text Formatting | My Library {% endblock title %}
+
+{% block content %}
+<h1 style="background-color: #f0f4c3; padding: 10px; font-weight: bold;">Example of Formatting Tags</h1>
+
+<p>This text has <b>subtext</b> using <code>&lt;b&gt;</code> tag</p>
+<p>This text has <strong>subtext</strong> using <code>&lt;strong&gt;</code> tag</p>
+<p>This text has <i>subtext</i> using <code>&lt;i&gt;</code> tag</p>
+<p>This text has <em>subtext</em> using <code>&lt;em&gt;</code> tag</p>
+<p>This text has <small>subtext</small> using <code>&lt;small&gt;</code> tag</p>
+<p>This text has <mark>subtext</mark> using <code>&lt;mark&gt;</code> tag</p>
+<p>This text has <del>subtext</del> using <code>&lt;del&gt;</code> tag</p>
+<p>This text has <ins>subtext</ins> using <code>&lt;ins&gt;</code> tag</p>
+<p>This text has X<sub>subtext</sub> using <code>&lt;sub&gt;</code> tag</p>
+<p>This text has X<sup>subtext</sup> using <code>&lt;sup&gt;</code> tag</p>
+
+{% endblock content %}

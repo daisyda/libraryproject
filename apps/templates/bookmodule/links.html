@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} HTML5 Links | My Library {% endblock title %}
+
+{% block content %}
+<h1>HTML5 Links Example</h1>
+
+<p>Here are some styled links:</p>
+
+<!-- First link (Opens in a new tab) -->
+<a href="https://myqu.qu.edu.sa/_IAM/login" class="custom-link" id="w3schools-link" target="_blank">
+    Go to QU website (New Tab)
+</a>
+
+<!-- Second link (Opens in the same tab) -->
+<a href="https://myqu.qu.edu.sa/_IAM/login" class="custom-link" id="mdn-link">
+    Go to QU website (Same Tab)
+</a>
+
+<!-- Third link (Opens in the same tab) -->
+<a href="https://myqu.qu.edu.sa/_IAM/login" class="custom-link" id="drf-link">
+    Go to QU website (Same Tab)
+</a>
+
+{% endblock content %}

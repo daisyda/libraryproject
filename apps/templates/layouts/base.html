@@ -2,14 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8"> <!-- ✅ Move this to the first line inside <head> -->
     <title>{% block title %} My Website {% endblock title %}</title>
-    <meta charset="UTF-8">
+    
     <link rel="icon" type="image/png" href="{% static 'qu-icon.png' %}">
+
+    <!-- ✅ Load both styles.css and main.css -->
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 </head>
 <body>
 
-    <!-- Include Navigation -->
+    <!-- ✅ Ensure the header exists in 'includes/header.html' -->
     {% include "includes/header.html" %}
 
     <!-- Page Content -->
@@ -17,7 +24,7 @@
         {% block content %}{% endblock content %}
     </div>
 
-    <!-- Include Footer -->
+    <!-- ✅ Ensure the footer exists in 'includes/footer.html' -->
     {% include "includes/footer.html" %}
 
 </body>
