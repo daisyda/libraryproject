@@ -31,4 +31,11 @@
 <div style="text-align: center;">
     <a href="{% url 'books.search' %}" style="text-decoration: none; background-color: #008CBA; color: white; padding: 10px 20px; border-radius: 5px;">Go Back to Search</a>
 </div>
+
+<!-- ✅ ADDING THE REQUIRED DJANGO LOOP -->
+{% for obj in books %}
+    <p>ID: {{ obj.id }}, Title: {{ obj.title }}</p>
+    <hr>
+{% endfor %}
+
 {% endblock content %}
