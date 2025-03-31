@@ -20,14 +20,15 @@ from apps.bookmodule import views
 
 from django.urls import include, path
 
+from django.contrib import admin
+from django.urls import path, include
+from apps.bookmodule import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-   # path('', apps.bookmodule.views.index),
-   # path('index2/<int:val1>/', apps.bookmodule.views.index2),
-    path('books/', include("apps.bookmodule.urls")),  
-    path('users/', include("apps.usermodule.urls")),  
-    #path('', views.index, name="home"),  # Home Page should load index.ht
-    path('', include('apps.bookmodule.urls')),  # Redirect root URL to books.index
+    path('', views.index, name='home'),  # ✅ الصفحة الرئيسية للمكتبة
+    path('books/', include("apps.bookmodule.urls")),  # روابط الكتب
+    path('users/', include("apps.usermodule.urls")),  # روابط المستخدمين (إذا مستخدم)
 ]
 
 

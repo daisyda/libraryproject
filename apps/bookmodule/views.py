@@ -51,13 +51,12 @@ def tables(request):
     """ Render the tables page """
     return render(request, "bookmodule/tables.html")
 
-def search_books(request):
+def search(request):
     if request.method == "POST":
-        string = request.POST.get('keyword', '').lower()
+        string = request.POST.get('keyword').lower()
         isTitle = request.POST.get('option1')
         isAuthor = request.POST.get('option2')
 
-        # Get books
         books = __getBooksList()
         newBooks = []
 
@@ -71,9 +70,10 @@ def search_books(request):
             if contained:
                 newBooks.append(item)
 
-        return render(request, 'bookmodule/bookList.html', {'books': newBooks})  # ✅ Redirect to results page
+        return render(request, 'bookmodule/bookList.html', {'books': newBooks})
 
     return render(request, 'bookmodule/search.html')
+
 
 
 def __getBooksList():
