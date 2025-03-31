@@ -18,3 +18,4 @@ venv/
 # Ignore system files
 *.DS_Store
 .history
+apps/bookmodule/first1.sqlite3-query
