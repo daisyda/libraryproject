@@ -93,14 +93,14 @@ def simple_query(request):
 
 def complex_query(request):
     mybooks = Book.objects.filter(
-        author__isnull=False  # Ensure author exists
+        author__isnull=False
     ).filter(
-        title__icontains='and'  # Title contains "and"
+        title__icontains='and'
     ).filter(
-        edition__gte=2  # Edition is 2 or greater
+        edition__gte=2
     ).exclude(
-        price__lte=100  # Exclude books with price ≤ 100
-    )[:10]  # Limit results to 10
+        price__lte=100
+    )[:10]  # نعرض فقط أول 10 نتائج
 
     if len(mybooks) >= 1:
         return render(request, 'bookmodule/bookList.html', {'books': mybooks})
