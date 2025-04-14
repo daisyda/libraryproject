@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block title %}Lab 8 - Task 3{% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">Books with Edition ≤ 3 and title/author does NOT contain "co"</h1>
+
+<table border="1" style="margin:auto; width: 80%;">
+    <tr style="background-color: #4CAF50; color: white;">
+        <th>Book ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Edition</th>
+    </tr>
+    {% for book in books %}
+    <tr style="text-align:center;">
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.edition }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

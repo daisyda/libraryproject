@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{% block title %} Task 5 | My Library {% endblock title %}
+
+{% block content %}
+<h1>Book Statistics</h1>
+
+<ul>
+    <li>Total Number of Books: {{ stats.total_books }}</li>
+    <li>Total Price: ${{ stats.total_price }}</li>
+    <li>Average Price: ${{ stats.average_price|floatformat:2 }}</li>
+    <li>Maximum Price: ${{ stats.max_price }}</li>
+    <li>Minimum Price: ${{ stats.min_price }}</li>
+</ul>
+
+{% endblock content %}
