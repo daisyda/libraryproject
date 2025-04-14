@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 9 - Task 2 {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">Courses and Registered Students</h1>
+
+<table border="1" style="margin:auto; width: 80%; text-align:center;">
+    <tr style="background-color: #4CAF50; color: white;">
+        <th>Course Title</th>
+        <th>Course Code</th>
+        <th>Number of Students</th>
+        <th>Student Names</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+        <td>{{ course.title }}</td>
+        <td>{{ course.code }}</td>
+        <td>{{ course.students.count }}</td>
+        <td>
+            <ul>
+                {% for student in course.students.all %}
+                <li>{{ student.name }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

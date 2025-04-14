@@ -6,6 +6,12 @@ from django.db.models.functions import Lower
 from django.db.models import Count, Sum, Avg, Max, Min
 from django.db.models import Count
 from apps.bookmodule.models import Address
+from .models import Department
+from .models import Department, Student
+from django.db.models import Max
+from .models import Course
+from django.db.models import Min
+
 
 
 
@@ -164,3 +170,47 @@ def lab8_task5(request):
 def students_per_city(request):
     city_stats = Address.objects.annotate(student_count=Count('student'))
     return render(request, 'bookmodule/lab8_task7.html', {'city_stats': city_stats})
+
+# Lab 9:
+
+def lab9_task1(request):
+    departments = Department.objects.annotate(student_count=Count('student'))
+    return render(request, 'bookmodule/lab9_task1.html', {'departments': departments})
+
+def lab9_task2(request):
+    courses = Course.objects.prefetch_related('students').all()
+    return render(request, 'bookmodule/lab9_task2.html', {'courses': courses})
+
+
+
+
+
+def lab9_task3(request):
+    # نحسب أقل ID في كل قسم
+    departments = Department.objects.annotate(first_student_id=Min('student__id'))
+
+    result = []
+
+    for dept in departments:
+        if dept.first_student_id:
+            student = Student.objects.get(id=dept.first_student_id)
+            result.append({
+                'department': dept.name,
+                'student_name': student.name,
+                'student_id': student.id,
+                'student_age': student.age,
+            })
+
+    return render(request, 'bookmodule/lab9_task3.html', {'result': result})
+
+
+    return render(request, 'bookmodule/lab9_task3.html', {'result': result})
+
+def lab9_task4(request):
+    departments = (
+        Department.objects
+        .annotate(student_count=Count('student'))
+        .filter(student_count__gt=2)
+        .order_by('-student_count')
+    )
+    return render(request, 'bookmodule/lab9_task4.html', {'departments': departments})

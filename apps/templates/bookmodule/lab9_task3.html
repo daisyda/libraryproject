@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block title %} First Student per Department {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">First Student Enrolled in Each Department</h1>
+
+<table border="1" style="margin:auto; width: 70%; text-align:center;">
+    <tr style="background-color: #4CAF50; color: white;">
+        <th>Department</th>
+        <th>Student Name</th>
+        <th>Student ID</th>
+        <th>Age</th>
+    </tr>
+    {% for entry in result %}
+    <tr>
+        <td>{{ entry.department }}</td>
+        <td>{{ entry.student_name }}</td>
+        <td>{{ entry.student_id }}</td>
+        <td>{{ entry.student_age }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

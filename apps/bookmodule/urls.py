@@ -32,6 +32,17 @@ urlpatterns = [
     path('lab8/task5', views.lab8_task5, name='books.lab8_task5'),
     path('lab8/task7/', views.students_per_city, name='lab8.task7'),
 
+    # Lab 9
+    path('lab9/task1/', views.lab9_task1, name='lab9.task1'),
+    path('lab9/task2/', views.lab9_task2, name='lab9.task2'),
+    path('lab9/task3/', views.lab9_task3, name='lab9.task3'),
+    path('lab9/task4/', views.lab9_task4, name='lab9.task4'),
+    
+
+
+
+
+
 
 
 
