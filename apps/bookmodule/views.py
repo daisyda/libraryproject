@@ -11,6 +11,8 @@ from .models import Department, Student
 from django.db.models import Max
 from .models import Course
 from django.db.models import Min
+from django.shortcuts import redirect
+
 
 
 
@@ -184,7 +186,6 @@ def lab9_task2(request):
 
 
 
-
 def lab9_task3(request):
     # نحسب أقل ID في كل قسم
     departments = Department.objects.annotate(first_student_id=Min('student__id'))
@@ -204,7 +205,7 @@ def lab9_task3(request):
     return render(request, 'bookmodule/lab9_task3.html', {'result': result})
 
 
-    return render(request, 'bookmodule/lab9_task3.html', {'result': result})
+    
 
 def lab9_task4(request):
     departments = (
@@ -214,3 +215,89 @@ def lab9_task4(request):
         .order_by('-student_count')
     )
     return render(request, 'bookmodule/lab9_task4.html', {'departments': departments})
+
+#lab 10:
+from django.shortcuts import get_object_or_404
+
+from .models import Book
+from django.http import HttpResponse
+
+def lab9_part1_listbooks(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/lab9_part1_listbooks.html', {'books': books})
+
+
+
+def lab9_part1_addbook(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        price = request.POST.get('price')
+        edition = request.POST.get('edition')
+
+        Book.objects.create(
+            title=title,
+            author=author,
+            price=price,
+            edition=edition
+        )
+        return redirect('lab9_part1.listbooks')
+
+    return render(request, 'bookmodule/lab9_part1_addbook.html')
+
+
+def lab9_part1_editbook(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    if request.method == "POST":
+        book.title = request.POST.get('title')
+        book.author = request.POST.get('author')
+        book.price = request.POST.get('price')
+        book.edition = request.POST.get('edition')
+        book.save()
+        return redirect('lab9_part1.listbooks')
+
+    return render(request, 'bookmodule/lab9_part1_editbook.html', {'book': book})
+
+def lab9_part1_deletebook(request, id):
+    book = get_object_or_404(Book, id=id)
+    book.delete()
+    return redirect('lab9_part1.listbooks')
+
+
+
+from .forms import BookForm  # لازم نستورد BookForm
+
+# ✅ عرض جميع الكتب
+def lab9_part2_listbooks(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/lab9_part2_listbooks.html', {'books': books})
+
+# ✅ إضافة كتاب جديد
+def lab9_part2_addbook(request):
+    if request.method == "POST":
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lab9_part2.listbooks')
+    else:
+        form = BookForm()
+    return render(request, 'bookmodule/lab9_part2_addbook.html', {'form': form})
+
+# ✅ تعديل بيانات كتاب
+def lab9_part2_editbook(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('lab9_part2.listbooks')
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'bookmodule/lab9_part2_editbook.html', {'form': form, 'book': book})
+
+# ✅ حذف كتاب
+def lab9_part2_deletebook(request, id):
+    book = get_object_or_404(Book, id=id)
+    book.delete()
+    return redirect('lab9_part2.listbooks')

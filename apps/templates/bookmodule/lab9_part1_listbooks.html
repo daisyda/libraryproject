@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% block title %} Book List | Lab 9 Part 1 {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">📚 Book List (Manual CRUD)</h1>
+
+<div style="text-align:center; margin-bottom:20px;">
+    <a href="{% url 'lab9_part1.addbook' %}" style="padding:10px 20px; background-color:#4CAF50; color:white; border-radius:5px; text-decoration:none;">➕ Add New Book</a>
+</div>
+
+<table border="1" style="margin:auto; width: 80%; text-align:center;">
+    <tr style="background-color:#2196F3; color:white;">
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Edition</th>
+        <th>Actions</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price }}</td>
+        <td>{{ book.edition }}</td>
+        <td>
+            <a href="{% url 'lab9_part1.editbook' book.id %}">✏️ Edit</a> |
+            <a href="{% url 'lab9_part1.deletebook' book.id %}" onclick="return confirm('Are you sure you want to delete this book?')">🗑️ Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

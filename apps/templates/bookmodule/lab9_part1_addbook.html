@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block title %} Add Book {% endblock title %}
+
+{% block content %}
+<h2 style="text-align:center;">➕ Add New Book</h2>
+
+<form method="POST" style="width:50%; margin:auto;">
+    {% csrf_token %}
+    <label>Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Author:</label><br>
+    <input type="text" name="author" required><br><br>
+
+    <label>Price:</label><br>
+    <input type="number" step="0.01" name="price" required><br><br>
+
+    <label>Edition:</label><br>
+    <input type="number" name="edition" required><br><br>
+
+    <button type="submit" style="background-color:#4CAF50; color:white; padding:10px;">Save</button>
+    <a href="{% url 'lab9_part1.listbooks' %}" style="margin-left:20px;">Cancel</a>
+</form>
+{% endblock content %}

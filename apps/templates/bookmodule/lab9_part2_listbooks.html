@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% block title %} Book List | Lab9 Part2 {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">📚 Book List (With Django Forms)</h1>
+
+<div style="text-align:center; margin-bottom:20px;">
+    <a href="{% url 'lab9_part2.addbook' %}" style="background-color:#4CAF50; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;">➕ Add New Book</a>
+</div>
+
+<table border="1" style="margin:auto; width: 80%; text-align:center;">
+    <tr style="background-color:#2196F3; color:white;">
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Edition</th>
+        <th>Actions</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price }}</td>
+        <td>{{ book.edition }}</td>
+        <td>
+            <a href="{% url 'lab9_part2.editbook' book.id %}">✏️ Edit</a> |
+            <a href="{% url 'lab9_part2.deletebook' book.id %}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

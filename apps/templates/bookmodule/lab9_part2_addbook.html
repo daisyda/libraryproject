@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+{% block title %} Add Book | Lab9 Part2 {% endblock title %}
+
+{% block content %}
+<h2 style="text-align:center;">➕ Add New Book</h2>
+
+<form method="POST" style="width:50%; margin:auto;">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" style="background-color:#4CAF50; color:white; padding:10px;">Save</button>
+    <a href="{% url 'lab9_part2.listbooks' %}" style="margin-left:20px;">Cancel</a>
+</form>
+{% endblock content %}
