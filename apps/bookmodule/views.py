@@ -15,6 +15,8 @@ from django.shortcuts import redirect
 from .forms import GalleryItemForm
 from .models import Student2, Address2
 from .forms import Student2Form
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -316,11 +318,13 @@ from apps.bookmodule.models import Address
 
 
 # ✅ List Students
+@login_required
 def student_list(request):
     students = Student.objects.all()
     return render(request, 'bookmodule/lab11_student_list.html', {'students': students})
 
 # ✅ Add Student + Address
+@login_required
 def student_add(request):
     if request.method == 'POST':
         s_form = StudentForm(request.POST)
@@ -338,6 +342,7 @@ def student_add(request):
 
 
 # ✅ Edit Student + Address
+@login_required
 def student_update(request, pk):
     student = get_object_or_404(Student, pk=pk)
     address = student.address
@@ -350,6 +355,7 @@ def student_update(request, pk):
     return render(request, 'bookmodule/lab11_edit_student.html', {'s_form': s_form, 'a_form': a_form})
 
 # ✅ Delete Student
+@login_required
 def student_delete(request, pk):
     student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
@@ -358,11 +364,12 @@ def student_delete(request, pk):
     return render(request, 'bookmodule/lab11_delete_student.html', {'student': student})
 
 
-
+@login_required
 def student2_list(request):
     students = Student2.objects.all()
     return render(request, 'bookmodule/student2_list.html', {'students': students})
 
+@login_required
 def student2_add(request):
     if request.method == 'POST':
         form = Student2Form(request.POST)
@@ -374,7 +381,7 @@ def student2_add(request):
     return render(request, 'bookmodule/student2_add.html', {'form': form})
 
 
-
+@login_required
 def gallery_upload(request):
     if request.method == 'POST':
         form = GalleryItemForm(request.POST, request.FILES)
