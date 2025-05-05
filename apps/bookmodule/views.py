@@ -12,6 +12,11 @@ from django.db.models import Max
 from .models import Course
 from django.db.models import Min
 from django.shortcuts import redirect
+from .forms import GalleryItemForm
+from .models import Student2, Address2
+from .forms import Student2Form
+
+
 
 
 
@@ -301,3 +306,82 @@ def lab9_part2_deletebook(request, id):
     book = get_object_or_404(Book, id=id)
     book.delete()
     return redirect('lab9_part2.listbooks')
+
+
+#Lab 11
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import StudentForm, AddressForm
+from .models import Student, Address
+from apps.bookmodule.models import Address
+
+
+# ✅ List Students
+def student_list(request):
+    students = Student.objects.all()
+    return render(request, 'bookmodule/lab11_student_list.html', {'students': students})
+
+# ✅ Add Student + Address
+def student_add(request):
+    if request.method == 'POST':
+        s_form = StudentForm(request.POST)
+        a_form = AddressForm(request.POST)
+        if s_form.is_valid() and a_form.is_valid():
+            address = a_form.save()  # Always creates a new Address object
+            student = s_form.save(commit=False)
+            student.address = address
+            student.save()
+            return redirect('student_list')
+    else:
+        s_form = StudentForm()
+        a_form = AddressForm()
+    return render(request, 'bookmodule/lab11_add_student.html', {'s_form': s_form, 'a_form': a_form})
+
+
+# ✅ Edit Student + Address
+def student_update(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    address = student.address
+    s_form = StudentForm(request.POST or None, instance=student)
+    a_form = AddressForm(request.POST or None, instance=address)
+    if request.method == 'POST' and s_form.is_valid() and a_form.is_valid():
+        a_form.save()
+        s_form.save()
+        return redirect('student_list')
+    return render(request, 'bookmodule/lab11_edit_student.html', {'s_form': s_form, 'a_form': a_form})
+
+# ✅ Delete Student
+def student_delete(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('student_list')
+    return render(request, 'bookmodule/lab11_delete_student.html', {'student': student})
+
+
+
+def student2_list(request):
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/student2_list.html', {'students': students})
+
+def student2_add(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student2_list')
+    else:
+        form = Student2Form()
+    return render(request, 'bookmodule/student2_add.html', {'form': form})
+
+
+
+def gallery_upload(request):
+    if request.method == 'POST':
+        form = GalleryItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('gallery_upload')
+    else:
+        form = GalleryItemForm()
+    return render(request, 'bookmodule/gallery_upload.html', {'form': form})
+

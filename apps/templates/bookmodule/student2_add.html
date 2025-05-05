@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+{% block title %}Add Student2{% endblock %}
+{% block content %}
+<h1>➕ Add Student with Addresses</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'student2_list' %}">⬅ Back to List</a>
+{% endblock %}

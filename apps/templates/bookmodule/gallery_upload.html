@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+{% block title %}Upload Image{% endblock %}
+{% block content %}
+<h1>🖼️ Upload to Gallery</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}

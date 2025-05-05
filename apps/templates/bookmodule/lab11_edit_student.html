@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% block title %} Edit Student | Lab 11 {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center;">✏️ Edit Student</h1>
+
+<form method="post" style="max-width: 600px; margin: auto;">
+    {% csrf_token %}
+    <fieldset style="border: 1px solid #ccc; padding: 20px;">
+        <legend>Student Info</legend>
+        {{ s_form.as_p }}
+    </fieldset>
+
+    <fieldset style="border: 1px solid #ccc; padding: 20px; margin-top: 20px;">
+        <legend>Address Info</legend>
+        {{ a_form.as_p }}
+    </fieldset>
+
+    <div style="text-align:center; margin-top: 20px;">
+        <button type="submit" style="padding:10px 20px; background-color:#2196F3; color:white;">Update</button>
+    </div>
+</form>
+
+<div style="text-align:center; margin-top: 20px;">
+    <a href="{% url 'student_list' %}">⬅ Back to List</a>
+</div>
+{% endblock content %}

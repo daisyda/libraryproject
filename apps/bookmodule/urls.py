@@ -4,6 +4,10 @@ from . import views
 from django.urls import path
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('', views.index, name="books.index"),  # Home Page
     path('list_books/', views.list_books, name="books.list_books"),  # List of Books
@@ -53,29 +57,48 @@ path('lab9_part2/editbook/<int:id>/', views.lab9_part2_editbook, name='lab9_part
 path('lab9_part2/deletebook/<int:id>/', views.lab9_part2_deletebook, name='lab9_part2.deletebook'),
 
 
+#lab 11
+
+path('students/', views.student_list, name='student_list'),
+path('students/add/', views.student_add, name='student_add'),
+path('students/update/<int:pk>/', views.student_update, name='student_update'),
+path('students/delete/<int:pk>/', views.student_delete, name='student_delete'),
+
+path('students2/', views.student2_list, name='student2_list'),
+path('students2/add/', views.student2_add, name='student2_add'),
 
 
-
-
-
-
-    
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
+ path('gallery/upload/', views.gallery_upload, name='gallery_upload'),
 ]
+
+# ✅ Append static URLs for media files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block title %} Delete Student | Lab 11 {% endblock title %}
+
+{% block content %}
+<h1 style="text-align:center; color: red;">🗑️ Confirm Delete</h1>
+
+<p style="text-align:center;">Are you sure you want to delete student <strong>{{ student.name }}</strong>?</p>
+
+<form method="post" style="text-align:center;">
+    {% csrf_token %}
+    <button type="submit" style="padding:10px 20px; background-color:red; color:white;">Yes, Delete</button>
+</form>
+
+<div style="text-align:center; margin-top: 20px;">
+    <a href="{% url 'student_list' %}">⬅ Cancel</a>
+</div>
+{% endblock content %}

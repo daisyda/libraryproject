@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %}
+{% block title %}Students2 List{% endblock %}
+{% block content %}
+<h1>📚 Students (Many-to-Many)</h1>
+<a href="{% url 'student2_add' %}">➕ Add Student</a>
+<ul>
+    {% for student in students %}
+    <li>
+        <strong>{{ student.name }}</strong> ({{ student.age }} years old)<br>
+        Addresses:
+        <ul>
+            {% for addr in student.addresses.all %}
+            <li>{{ addr.street }}, {{ addr.city }} - {{ addr.zipcode }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

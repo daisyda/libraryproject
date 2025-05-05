@@ -9,10 +9,14 @@ from django.db import models
 
 
 class Address(models.Model):
+    street = models.CharField(max_length=100, default="Unknown Street")  # 👈 Add this line
     city = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=10, default="00000")  # Optional: add this too
 
     def __str__(self):
-        return self.city
+        return f"{self.street}, {self.city}, {self.zipcode}"
+
+
 
 
 class Card(models.Model):
@@ -40,7 +44,11 @@ class Course(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+  #  address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.OneToOneField(Address, on_delete=models.CASCADE)
+
+    #address = models.OneToOneField(Address, on_delete=models.CASCADE)
+
 
     # ✅ إضافة العلاقة مع Card
     card = models.OneToOneField(
@@ -59,3 +67,26 @@ class Student(models.Model):
         return self.name
 
 
+class Address2(models.Model):
+    city = models.CharField(max_length=100)
+    street = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.street}, {self.city}"
+
+class Student2(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    addresses = models.ManyToManyField(Address2, related_name='students2')
+
+    def __str__(self):
+        return self.name
+
+
+class GalleryItem(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='gallery/')
+
+    def __str__(self):
+        return self.title
